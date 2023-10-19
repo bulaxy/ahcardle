@@ -14,7 +14,7 @@ export const AnswerBoxes = (props) => {
         } else if (commonElements.length > 0) {
             return 'makeYellow';
         } else {
-            if(['xp', 'cost', 'wild', 'intellect', 'willpower', 'combat',' agility'].includes(specAns)){
+            if(['xp', 'cost', 'wild', 'intellect', 'willpower', 'combat','agility'].includes(specAns)){
                 let arrow
                 answer[specAns][0] < finalAnswer[specAns][0] ? arrow = 'yearBefore' : arrow = 'yearAfter'
                 return `makeRed ${arrow}`
