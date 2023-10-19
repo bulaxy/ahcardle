@@ -10,7 +10,6 @@ function App() {
     const [winSpin, setWinSpin] = useState('')
     const tries = useRef([])
     const [win, setWin] = useState(false)
-    console.log(answer.current.releaseYear)
     const initReset = () => {
         setTimeout(() => {
             setUserAnswer('');

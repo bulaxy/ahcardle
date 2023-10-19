@@ -5,7 +5,7 @@ import {dataObjects} from "./data/dataObjects";
 const SearchBar = ({getAnswer, passClass}) => {
     const [value, setValue] = useState('')
     const [suggestions, setSuggestions] = useState([])
-    const options = dataObjects.map(el => el.champion);
+    const options = dataObjects.map(el => el.cardName);
     const usedValues = useRef([])
     const getSuggestions = (inputValue) => {
         const inputValueLowerCase = inputValue.trim().toLowerCase();
@@ -29,11 +29,11 @@ const SearchBar = ({getAnswer, passClass}) => {
             return
         }
         else if(!options.find(el => el[0] == value) && suggestions.length > 0){
-            userAnswer = dataObjects.filter(el => el.champion == suggestions[0])
+            userAnswer = dataObjects.filter(el => el.cardName == suggestions[0])
             usedValues.current.push(suggestions[0].join(''))
         }
         else{
-            userAnswer = dataObjects.filter(el => el.champion == value)
+            userAnswer = dataObjects.filter(el => el.cardName == value)
             usedValues.current.push(value)
         }
         getAnswer(userAnswer)
@@ -54,7 +54,7 @@ const SearchBar = ({getAnswer, passClass}) => {
                 value={value}
                 onChange={handleInputChange}
                 onKeyPress={handleKeyPress}
-                placeholder="Type champion name..."
+                placeholder="Type card name..."
             />
                 <button onClick={handleCompareClick}>➤</button>
                 <ul>

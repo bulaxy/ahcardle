@@ -3,8 +3,9 @@ import {useEffect, useRef} from "react";
 export const AnswerBoxes = (props) => {
     const timeoutRef = useRef(null)
     let answer = props.answer[0]
+    // console.log('11',answer)
     let finalAnswer = props.finalAnswer
-    const champName = answer.champion.join('').replace(/[.'" ]/g, '')
+    const cardName = answer.cardName.join('').replace(/[.'" ]/g, '')
     const adjustClass = (specAns) => {
         const commonElements = answer[specAns].filter((el) => finalAnswer[specAns].includes(el));
         const areEqual = answer[specAns].length === finalAnswer[specAns].length && commonElements.length === finalAnswer[specAns].length
@@ -13,7 +14,7 @@ export const AnswerBoxes = (props) => {
         } else if (commonElements.length > 0) {
             return 'makeYellow';
         } else {
-            if(specAns === 'releaseYear'){
+            if(['xp', 'cost', 'wild', 'intellect', 'willpower', 'combat',' agility'].includes(specAns)){
                 let arrow
                 answer[specAns][0] < finalAnswer[specAns][0] ? arrow = 'yearBefore' : arrow = 'yearAfter'
                 return `makeRed ${arrow}`
@@ -46,26 +47,34 @@ export const AnswerBoxes = (props) => {
             <table>
                 <tbody>
                     <tr>
-                        <th>Champion</th>
-                        <th>Gender</th>
-                        <th>Position</th>
-                        <th>Species</th>
-                        <th>Resource</th>
-                        <th>Range type</th>
-                        <th>Regions</th>
-                        <th>Release year</th>
+                        <th>Card</th>
+                        <th>Type</th>
+                        <th>Class</th>
+                        <th>xp</th>
+                        <th>Traits</th>
+                        <th>Slot</th>
+                        <th>cost</th>
+                        <th>Agility</th>
+                        <th>Combat</th>
+                        <th>Intellect</th>
+                        <th>Wild</th>
+                        <th>Willpower</th>
                     </tr>
                     <tr ref={timeoutRef}>
                         <td className='champImg'> {/*ADD IMG PROPERTY TO EACH OBJECT AND SEARCH WITH IT */}
-                            <img src={`https://ddragon.leagueoflegends.com/cdn/13.15.1/img/champion/${champName}.png`} alt=""/>
+                            {answer.cardName}
                         </td>
-                        {displayedAnswer('gender')}
-                        {displayedAnswer('position')}
-                        {displayedAnswer('species')}
-                        {displayedAnswer('resource')}
-                        {displayedAnswer('rangeType')}
-                        {displayedAnswer('regions')}
-                        {displayedAnswer('releaseYear')}
+                        {displayedAnswer('typeName')}
+                        {displayedAnswer('class')}
+                        {displayedAnswer('xp')}
+                        {displayedAnswer('traits')}
+                        {displayedAnswer('slot')}
+                        {displayedAnswer('cost')}
+                        {displayedAnswer('agility')}
+                        {displayedAnswer('combat')}
+                        {displayedAnswer('intellect')}
+                        {displayedAnswer('wild')}
+                        {displayedAnswer('willpower')}
                     </tr>
                 </tbody>
             </table>
