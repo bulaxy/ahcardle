@@ -1,70 +1,43 @@
 import React, {useRef, useState} from 'react';
 import './assets/searchBar.css';
 import {dataObjects} from "./data/dataObjects";
+import { Dropdown } from 'semantic-ui-react';
 
 const SearchBar = ({getAnswer, passClass}) => {
     const [value, setValue] = useState('')
     const [suggestions, setSuggestions] = useState([])
     const options = dataObjects.map(el => el.cardName);
     const usedValues = useRef([])
-    const getSuggestions = (inputValue) => {
-        const inputValueLowerCase = inputValue.trim().toLowerCase();
-        return options.filter(option =>
-            !usedValues.current.includes(option[0]) &&
-            option[0].split("'").join('').toLowerCase().startsWith(inputValueLowerCase)
-        );
-    };
-    const handleInputChange = (event) => {
-        const inputValue = event.target.value
-        setValue(inputValue)
-        setSuggestions(getSuggestions(inputValue))
-    }
-    const handleSuggestionClick = (suggestion) => {
-        setValue(suggestion)
-        setSuggestions([])
+    const handleInputChange = (inputValue) => {
+        console.log(inputValue,dataObjects)
+        setValue(inputValue.value)
     }
     const handleCompareClick = (viaEnter, checkMore) => {
         let userAnswer
-        if(!options.find(el => el[0] == value) && suggestions.length < 1){
-            return
-        }
-        else if(!options.find(el => el[0] == value) && suggestions.length > 0){
-            userAnswer = dataObjects.filter(el => el.cardName == suggestions[0])
+         if(!options.find(el => el[0] == value) && suggestions.length > 0){
+            userAnswer = dataObjects.filter(el => el.id == suggestions[0])
             usedValues.current.push(suggestions[0].join(''))
         }
         else{
-            userAnswer = dataObjects.filter(el => el.cardName == value)
+            userAnswer = dataObjects.filter(el => el.id == value)
             usedValues.current.push(value)
         }
         getAnswer(userAnswer)
-        setSuggestions([])
-        setValue('')
-    }
-    const handleKeyPress = (event) => {
-        if(event.key === 'Enter'){
-            handleCompareClick()
-        }
+        setValue(undefined)
     }
 
     return(
         <div>
             <div className={`searchBar + ${passClass}`}>
-            <input
-                type="text"
+            <Dropdown
+                placeholder='Type card name...'
+                search
+                selection
                 value={value}
-                onChange={handleInputChange}
-                onKeyPress={handleKeyPress}
-                placeholder="Type card name..."
+                onChange={(_,o)=>handleInputChange(o)}
+                options={dataObjects.map(o=>({key:o.id, value:o.id, text:`${o.cardName} (${o.xp})`}))}
             />
-                <button onClick={handleCompareClick}>➤</button>
-                <ul>
-                    {suggestions.map((suggestion, index) => (
-                        value !== '' &&
-                        <li key={index} onClick={() => handleSuggestionClick(suggestion[0])}>
-                            {suggestion}
-                        </li>
-                    ))}
-                </ul>
+            <button onClick={handleCompareClick}>➤</button>
             </div>
 
         </div>
