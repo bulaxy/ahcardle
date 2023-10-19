@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/ahcardle/static/css/main.d53fb1f4.css",
+    "main.js": "/ahcardle/static/js/main.db567b70.js",
+    "static/media/AHWallpaper.jpg": "/ahcardle/static/media/AHWallpaper.a1efd7e676271fa6d583.jpg",
+    "static/media/Friz Quadrata Std Regular.otf": "/ahcardle/static/media/Friz Quadrata Std Regular.aff9163cc1d1a0cf84c8.otf",
+    "index.html": "/ahcardle/index.html",
+    "main.d53fb1f4.css.map": "/ahcardle/static/css/main.d53fb1f4.css.map",
+    "main.db567b70.js.map": "/ahcardle/static/js/main.db567b70.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d53fb1f4.css",
+    "static/js/main.db567b70.js"
+  ]
+}
