@@ -29,6 +29,7 @@ function App() {
            )).reverse();
     };
     const ansBox = useMemo(() => {
+        console.log(answer.current)
         if(JSON.stringify(userAnswer) === JSON.stringify([answer.current])) setTimeout(() => {
             setWinSpin('initWin')
             setTimeout(() => {
