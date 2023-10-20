@@ -24,7 +24,7 @@ function App() {
     }
     const displayAnswer = (ans) => {
         if(ans !== '') tries.current.push(ans);
-        return tries.current.map((el, index) => (
+        return tries.current.filter(o=>o.length).map((el, index) => (
                <AnswerBoxes key={index} finalAnswer={answer.current} answer={el} />
            )).reverse();
     };
@@ -37,7 +37,7 @@ function App() {
             },1400)
 
         },2500)
-            return displayAnswer(userAnswer);
+        return displayAnswer(userAnswer);
     }, [userAnswer]);
 
 
